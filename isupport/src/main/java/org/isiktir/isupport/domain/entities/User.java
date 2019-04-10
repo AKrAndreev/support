@@ -23,6 +23,7 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     @Override
+    @Column(name = "username", nullable = false, unique = true, updatable = false)
     public String getUsername() {
         return username;
     }
@@ -40,6 +41,7 @@ public class User extends BaseEntity implements UserDetails {
         this.password = password;
     }
 
+    @Column(name = "email",nullable = false,unique = true)
     public String getEmail() {
         return email;
     }
