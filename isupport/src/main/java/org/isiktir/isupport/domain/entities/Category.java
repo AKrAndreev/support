@@ -10,10 +10,11 @@ public class Category extends BaseEntity {
 
     private String name;
     private Set<Category> subcategodires;
+    private boolean isSubdirectory;
     public Category() {
     }
 
-    @Column(name = "name",nullable = false,unique = true)
+    @Column(name = "name",nullable = false)
     @NotNull
     @Size(min = 3,max = 20)
     public String getName() {
@@ -35,5 +36,13 @@ public class Category extends BaseEntity {
 
     public void setSubcategodires(Set<Category> subcategodires) {
         this.subcategodires = subcategodires;
+    }
+
+    public boolean isSubdirectory() {
+        return isSubdirectory;
+    }
+
+    public void setSubdirectory(boolean subdirectory) {
+        isSubdirectory = subdirectory;
     }
 }

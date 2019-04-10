@@ -1,11 +1,11 @@
-<th:block th:fragment="navbar">
+<th:block th:fragment="navbar2">
     <div class="loader"></div>
     <div id="myDiv">
         <!--HEADER-->
         <div class="header">
             <div class="bg-color">
                 <header id="main-header">
-                    <nav class="navbar navbar-default navbar-fixed-top">
+                    <nav class="navbar navbar-dark   navbar-fixed-top "  >
                         <div class="container">
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -17,14 +17,8 @@
                             </div>
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li class="active"><a th:href="@{/}">Home</a></li>
-                                    <li class=""><a href="#feature">About</a></li>
-                                    <li class=""><a href="#service">Services</a></li>
-                                    <li class=""><a href="#portfolio">Causes</a></li>
-                                    <li class=""><a href="#testimonial">Testimonial</a></li>
-                                    <li  class=""><a href="#blog">Blog</a></li>
-                                    <li class=""><a href="#contact">Contact Us</a></li>
-                                    <li sec:authorize="isAuthenticated()" class="nav-link"><a th:href="@{/categories/create}">Category</a>
+                                    <li  class="active"><a style="color: #00c6ff" th:href="@{/}">Home</a></li>
+                                    <li sec:authorize="isAuthenticated()" class="nav-link"><a style="color: white" th:href="@{/categories/create}">Category</a>
                                     <li sec:authorize="isAnonymous()" class="nav-link"><a th:href="@{/register}">Register</a>
                                     <li sec:authorize="isAnonymous()"  class="nav-link"><a th:href="@{/login}">Login</a>
                                     <li sec:authorize="isAuthenticated()"  class="nav-link"> <a th:href ="@{/logout}">Logout</a>

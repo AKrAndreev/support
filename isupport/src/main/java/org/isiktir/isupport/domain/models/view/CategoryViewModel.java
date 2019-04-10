@@ -4,6 +4,7 @@ public class CategoryViewModel {
 
     private String id;
     private String name;
+    private boolean isSubdirectory;
 
     public CategoryViewModel() {
     }
@@ -22,5 +23,13 @@ public class CategoryViewModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isSubdirectory() {
+        return isSubdirectory;
+    }
+
+    public void setSubdirectory(boolean subdirectory) {
+        isSubdirectory = subdirectory;
     }
 }

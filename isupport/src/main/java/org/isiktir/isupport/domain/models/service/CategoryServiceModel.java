@@ -9,6 +9,7 @@ public class CategoryServiceModel {
     private String id;
     private String name;
     private Set<Category> subcategodires;
+    private boolean isSubdirectory;
 
     public CategoryServiceModel() {
     }
@@ -35,5 +36,13 @@ public class CategoryServiceModel {
 
     public void setSubcategodires(Set<Category> subcategodires) {
         this.subcategodires = subcategodires;
+    }
+
+    public boolean isSubdirectory() {
+        return isSubdirectory;
+    }
+
+    public void setSubdirectory(boolean subdirectory) {
+        isSubdirectory = subdirectory;
     }
 }
