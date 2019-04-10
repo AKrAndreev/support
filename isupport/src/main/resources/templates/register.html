@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:input="http://www.w3.org/1999/html">
+<head>
+	<link th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+	<link rel="stylesheet" type="text/css" th:href="@{css/styleR.css}">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<th:block th:replace="fragments/navbar"></th:block>
+
+<div class="container">
+	<div class="row">
+		<form action="/action_page.php" class="col-xs-12 col-sm-12 col-md-12"  id="register" name="register">
+			<h2>Please fill all mandatory(*) fields</h2>
+			<div class="form-group">
+				<input type="text" class="form-control" id="username" placeholder="Enter username *" name="username" required>
+			</div>
+
+			<div class="form-group">
+				<input type="email" class="form-control" id="email" placeholder="Enter email *" name="email" required>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="password" placeholder="Enter password *" name="password" required>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="confirmPassword" placeholder="Repeat password *" name="confirmPassword" required>
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" name="remember"> <span>Remember me</span></label>
+			</div>
+			<button type="submit" class="btn btn-success">Submit <i class="glyphicon glyphicon-send"></i></button>
+		</form>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script>
+	jQuery.validator.setDefaults({
+		debug: true,
+		success:  function(input){
+			input.attr('id', 'valid');
+		},
+	});
+	$( "#register" ).validate({
+		rules: {
+			password: "required",
+			confirmPassword: {
+				equalTo: "#password"
+			},
+			username:{
+				minlength:3,
+				maxlength:10,
+				required: true
+
+			}
+		},
+		messages: {
+			username: {
+				required: "Please provide an username",
+				minlength: "Min allowed username length is 3 characters",
+				maxlength: "Max allowed username length is 10 characters"
+			},
+			email: {
+				required: "Please provide an email"
+			},
+			password: {
+				required: "Please provide a password"
+			},
+			confirmPassword: {
+				required: "Please provide a password",
+				equalTo: "Passwords did not match!"
+			}
+		}
+	});
+</script>
+
+</html>
