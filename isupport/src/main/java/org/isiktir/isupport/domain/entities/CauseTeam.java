@@ -22,6 +22,8 @@ public class CauseTeam extends BaseEntity {
     private LocalDate byWhen;
     private Category category;
     private User user;
+    private Level level;
+
 
 
     public CauseTeam() {
@@ -110,9 +112,7 @@ public class CauseTeam extends BaseEntity {
         this.neededMoney = neededMoney;
     }
 
-    @Column(name = "colected_money")
-    @NotNull
-    @Min(0)
+    @Column(name = "colected_money",columnDefinition = "decimal(10,2) default '0'")
     public BigDecimal getCollectedMoney() {
         return collectedMoney;
     }
@@ -150,5 +150,15 @@ public class CauseTeam extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Column(name = "level")
+    @Enumerated(EnumType.STRING)
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
     }
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:input="http://www.w3.org/1999/html">
+<head>
+    <title>Essential JS 1: DropDownTree - Filtering Functionalities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link href="//cdn.syncfusion.com/16.4.0.42/js/web/flat-azure/ej.web.all.min.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+    <script src="//cdn.syncfusion.com/js/assets/external/jquery-1.11.3.min.js" type="text/javascript" ></script>
+    <![endif]-->
+    <!--[if IE 9]><!-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"> </script>
+    <!--<![endif]-->
+    <script src="//cdn.syncfusion.com/16.4.0.42/js/web/ej.web.all.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div class="content-container-fluid">
+    <div id="test"></div>
+    <div class="row">
+        <div class="cols-sample-area">
+            <div class="frame">
+                <div class="control">
+                    <input type="text" id="itemList" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+</body>
+
+<!--
+<script>
+    fetch('/causes/fetch')
+        .then((response) => response.json())
+    .then((json) => {
+
+
+        json.forEach((category) =>
+            $('#test').append("<ul>"+createUnorderedList(category.subcategodires)+"</ul>") );
+
+    function createUnorderedList(object) {
+        var ul = $('<ol>');
+
+        for (var i = 0; i < object.length; i++) {
+            if (object[i].subcategodires === undefined) {
+                ul.append($('<li>').text(object[i].name));
+            } else {
+                ul.append(
+                    $('<li>').html(
+                        object[i].name + "<ul>" + createUnorderedList(object[i].subcategodires) + "</ul>"));
+            }
+        }
+
+        return ul.html();
+    }
+    })
+    .catch((err) => console.log(err));
+</script>
+-->
+<!--
+<script type="text/javascript">
+    var localData = [{"id":"0052a53f-c298-4198-957a-fde2c21df5dd","name":"Man Football","hasChild":false,"pid":"3e4cb6ae-52fc-4c8d-b71f-4f5b679004bf"},{"id":"388eb8d9-e357-4064-911f-457949a7946b","name":"Man Football","hasChild":false,"pid":"cef5585f-f360-4d13-847a-3606527f479f"},{"id":"3e4cb6ae-52fc-4c8d-b71f-4f5b679004bf","name":"Ama Football","hasChild":true,"pid":"5a81e6c2-ecc2-4c85-bc03-222f5564150a"},{"id":"5a81e6c2-ecc2-4c85-bc03-222f5564150a","name":"Football","hasChild":true},{"id":"b9cd5680-3121-40e4-9018-2e5a79c57fa7","name":"Woman Football","hasChild":false,"pid":"cef5585f-f360-4d13-847a-3606527f479f"},{"id":"c005c261-578f-4107-824b-ef88bf1705a1","name":"Woman Football","hasChild":false,"pid":"3e4cb6ae-52fc-4c8d-b71f-4f5b679004bf"},{"id":"cef5585f-f360-4d13-847a-3606527f479f","name":"Proff Football","hasChild":true,"pid":"5a81e6c2-ecc2-4c85-bc03-222f5564150a"}];
+    $(function () {
+        $('#itemList').ejDropDownTree({
+            enableFilterSearch: true,
+            treeViewSettings: {
+                fields: { id: "id", parentId: "pid", text: "name", hasChild: "hasChild", dataSource: localData, expanded: "expanded" }
+            },
+            watermarkText: "Please select",
+            width: "100%"
+        });
+    });
+</script>
+
+-->
+
+
+
+</html>

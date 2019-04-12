@@ -10,7 +10,17 @@ public class Category extends BaseEntity {
 
     private String name;
     private Set<Category> subcategodires;
-    private boolean isSubdirectory;
+    private boolean hasChild;
+    private String pid;
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
     public Category() {
     }
 
@@ -38,11 +48,12 @@ public class Category extends BaseEntity {
         this.subcategodires = subcategodires;
     }
 
-    public boolean isSubdirectory() {
-        return isSubdirectory;
+
+    public boolean isHasChild() {
+        return hasChild;
     }
 
-    public void setSubdirectory(boolean subdirectory) {
-        isSubdirectory = subdirectory;
+    public void setHasChild(boolean hasChild) {
+        this.hasChild = hasChild;
     }
 }

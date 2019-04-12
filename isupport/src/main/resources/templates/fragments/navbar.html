@@ -24,7 +24,8 @@
                                     <li class=""><a href="#testimonial">Testimonial</a></li>
                                     <li  class=""><a href="#blog">Blog</a></li>
                                     <li class=""><a href="#contact">Contact Us</a></li>
-                                    <li sec:authorize="isAuthenticated()" class="nav-link"><a th:href="@{/categories/create}">Category</a>
+                                    <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-link"><a th:href="@{/categories/create}">Category</a>
+                                    <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-link"><a th:href="@{/causes/create-level}">Cause</a>
                                     <li sec:authorize="isAnonymous()" class="nav-link"><a th:href="@{/register}">Register</a>
                                     <li sec:authorize="isAnonymous()"  class="nav-link"><a th:href="@{/login}">Login</a>
                                     <li sec:authorize="isAuthenticated()"  class="nav-link"> <a th:href ="@{/logout}">Logout</a>

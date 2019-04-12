@@ -1,17 +1,21 @@
-package org.isiktir.isupport.domain.entities;
+package org.isiktir.isupport.domain.models.service;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import org.isiktir.isupport.domain.entities.Category;
+import org.isiktir.isupport.domain.entities.Level;
+import org.isiktir.isupport.domain.entities.User;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity(name = "cause_individual")
-public class CauseIndividual extends BaseEntity {
+public class CauseTeamServiceModel {
+
+    private String id;
     private String name;
     private String description;
     private String cause;
+    private int players;
+    private int trainers;
+    private int staff;
     private String imgUrl;
     private BigDecimal neededMoney;
     private BigDecimal collectedMoney;
@@ -20,10 +24,9 @@ public class CauseIndividual extends BaseEntity {
     private User user;
     private Level level;
 
-    public CauseIndividual() {
+    public CauseTeamServiceModel() {
     }
 
-    @NotNull
     public Level getLevel() {
         return level;
     }
@@ -32,9 +35,14 @@ public class CauseIndividual extends BaseEntity {
         this.level = level;
     }
 
-    @Column(name = "name")
-    @NotNull
-    @Size(min = 3,max = 10)
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -43,8 +51,6 @@ public class CauseIndividual extends BaseEntity {
         this.name = name;
     }
 
-    @Column(name = "description",columnDefinition = "TEXT")
-    @NotNull
     public String getDescription() {
         return description;
     }
@@ -52,8 +58,7 @@ public class CauseIndividual extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    @Column(name = "cause",columnDefinition = "TEXT")
-    @NotNull
+
     public String getCause() {
         return cause;
     }
@@ -62,8 +67,30 @@ public class CauseIndividual extends BaseEntity {
         this.cause = cause;
     }
 
-    @Column(name = "image_url")
-    @NotNull
+    public int getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(int players) {
+        this.players = players;
+    }
+
+    public int getTrainers() {
+        return trainers;
+    }
+
+    public void setTrainers(int trainers) {
+        this.trainers = trainers;
+    }
+
+    public int getStaff() {
+        return staff;
+    }
+
+    public void setStaff(int staff) {
+        this.staff = staff;
+    }
+
     public String getImgUrl() {
         return imgUrl;
     }
@@ -72,9 +99,6 @@ public class CauseIndividual extends BaseEntity {
         this.imgUrl = imgUrl;
     }
 
-    @Column(name = "needed_money")
-    @NotNull
-    @Min(1)
     public BigDecimal getNeededMoney() {
         return neededMoney;
     }
@@ -83,7 +107,6 @@ public class CauseIndividual extends BaseEntity {
         this.neededMoney = neededMoney;
     }
 
-    @Column( name = "colected_money",columnDefinition = "decimal(10,2) default '0.00'")
     public BigDecimal getCollectedMoney() {
         return collectedMoney;
     }
@@ -92,7 +115,6 @@ public class CauseIndividual extends BaseEntity {
         this.collectedMoney = collectedMoney;
     }
 
-    @Column(name = "by_when")
     public LocalDate getByWhen() {
         return byWhen;
     }
@@ -101,10 +123,6 @@ public class CauseIndividual extends BaseEntity {
         this.byWhen = byWhen;
     }
 
-    @ManyToOne(targetEntity = Category.class)
-    @JoinTable(name = "individual_cause_category",
-            joinColumns = @JoinColumn(name = "cause_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id",referencedColumnName = "id"))
     public Category getCategory() {
         return category;
     }
@@ -113,11 +131,6 @@ public class CauseIndividual extends BaseEntity {
         this.category = category;
     }
 
-    @NotNull
-    @ManyToOne
-    @JoinTable(name = "individual_cause_user",
-            joinColumns = @JoinColumn(name = "cause_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id",referencedColumnName = "id"))
     public User getUser() {
         return user;
     }

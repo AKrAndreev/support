@@ -1,11 +1,8 @@
 package org.isiktir.isupport.domain.models.view;
 
-import org.isiktir.isupport.domain.entities.Category;
-
 import java.util.List;
-import java.util.Set;
 
-public class CategoryViewModel {
+public class CategoryViewModelAddCause {
 
     private String id;
     private String name;
@@ -20,15 +17,7 @@ public class CategoryViewModel {
         this.pid = pid;
     }
 
-    public CategoryViewModel() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public CategoryViewModelAddCause() {
     }
 
     public String getName() {
@@ -39,6 +28,14 @@ public class CategoryViewModel {
         this.name = name;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public boolean isHasChild() {
         return hasChild;
     }
@@ -46,6 +43,4 @@ public class CategoryViewModel {
     public void setHasChild(boolean hasChild) {
         this.hasChild = hasChild;
     }
-
-
 }

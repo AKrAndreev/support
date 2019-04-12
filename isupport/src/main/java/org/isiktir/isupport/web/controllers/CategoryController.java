@@ -41,7 +41,7 @@ public class CategoryController extends BaseController {
 
         List<CategoryViewModel> categoryViewModels = service.findAll()
                 .stream()
-                .filter(c-> !c.isSubdirectory())
+                .filter(CategoryServiceModel::isHasChild)
                 .map(categoryServiceModel->mapper.map(categoryServiceModel,CategoryViewModel.class))
                 .collect(Collectors.toList());
         modelAndView.addObject("categories",categoryViewModels);
@@ -60,7 +60,18 @@ public class CategoryController extends BaseController {
             return super.view("create-category",modelAndView);
         }
 
-        model.getSubcategodires().forEach(sub->sub.setSubdirectory(true));
+        if (model.getSubcategodires().size()!=0){
+            model.getSubcategodires().forEach(c ->{
+                if (c.getSubcategodires().size()==0){
+                    c.setHasChild(false);
+                }
+            });
+            model.setHasChild(true);
+        }else {
+            model.setHasChild(true);
+        }
+
+
         service.createCategory(mapper.map(model, CategoryServiceModel.class));
 
         return super.redirect("/");

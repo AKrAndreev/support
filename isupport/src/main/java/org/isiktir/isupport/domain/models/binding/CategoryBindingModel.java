@@ -8,7 +8,16 @@ public class CategoryBindingModel {
     private String id;
     private String name;
     private Set<Category> subcategodires;
-    private boolean isSubdirectory;
+    private boolean hasChild;
+    private String pid;
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
 
     public CategoryBindingModel() {
     }
@@ -37,11 +46,11 @@ public class CategoryBindingModel {
         this.subcategodires = subcategodires;
     }
 
-    public boolean isSubdirectory() {
-        return isSubdirectory;
+    public boolean isHasChild() {
+        return hasChild;
     }
 
-    public void setSubdirectory(boolean subdirectory) {
-        isSubdirectory = subdirectory;
+    public void setHasChild(boolean hasChild) {
+        this.hasChild = hasChild;
     }
 }

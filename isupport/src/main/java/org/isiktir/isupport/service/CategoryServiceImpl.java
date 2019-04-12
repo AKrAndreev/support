@@ -26,7 +26,12 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryServiceModel createCategory(CategoryServiceModel model) {
 
         Category category = mapper.map(model,Category.class);
-        return mapper.map(repository.save(category),CategoryServiceModel.class);
+
+        Category savedCategory = repository.save(category);
+
+        savedCategory.getSubcategodires().forEach(sub -> sub.setPid(savedCategory.getId()));
+
+        return mapper.map(repository.save(savedCategory),CategoryServiceModel.class);
     }
 
     @Override
