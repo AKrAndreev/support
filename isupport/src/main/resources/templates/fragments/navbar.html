@@ -26,15 +26,16 @@
                                     <li class=""><a href="#contact">Contact Us</a></li>
                                     <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-link"><a th:href="@{/categories/create}">Category</a></li>
 
-                                    <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-link dropdown">
+                                    <li sec:authorize="hasRole('ROLE_SUPPORTED')" class="nav-link dropdown">
 
                                           <a class="dropdown-toggle" href="#" role="button" id="cause-dropdown"
                                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Create Cause <span class="caret"></span>
                                           </a>
                                           <ul class="dropdown-menu" role="menu">
-                                              <li class="nav-link"><a th:href="@{/causes/create-level}">Team</a></li>
-                                              <li class="nav-link"><a th:href="@{/causes/create-level-ind}">Individual</a></li>
+                                              <li  class="nav-link"><a th:href="@{/causes/create-level}">Team</a></li>
+                                              <li  class="nav-link"><a th:href="@{/causes/create-level-ind}">Individual</a></li>
+                                              <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-link"><a th:href="@{/causes/update}">Update</a></li>
                                           </ul>
                                     </li>
 

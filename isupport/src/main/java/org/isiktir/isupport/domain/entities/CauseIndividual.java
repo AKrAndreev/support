@@ -85,9 +85,8 @@ public class CauseIndividual extends BaseEntity {
         this.imgUrl = imgUrl;
     }
 
-    @Column(name = "needed_money")
+    @Column(name = "needed_money",columnDefinition = "decimal(10,2) default '0'")
     @NotNull
-    @Min(1)
     public BigDecimal getNeededMoney() {
         return neededMoney;
     }
@@ -105,6 +104,7 @@ public class CauseIndividual extends BaseEntity {
         this.collectedMoney = collectedMoney;
     }
 
+    @NotNull
     @Column(name = "by_when")
     public LocalDate getByWhen() {
         return byWhen;
@@ -114,6 +114,7 @@ public class CauseIndividual extends BaseEntity {
         this.byWhen = byWhen;
     }
 
+    @NotNull
     @ManyToOne(targetEntity = Category.class)
     @JoinTable(name = "individual_cause_category",
             joinColumns = @JoinColumn(name = "cause_id",referencedColumnName = "id"),

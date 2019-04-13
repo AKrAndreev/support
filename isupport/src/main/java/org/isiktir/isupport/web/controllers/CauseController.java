@@ -5,9 +5,13 @@ import org.isiktir.isupport.domain.entities.Level;
 import org.isiktir.isupport.domain.models.binding.CauseIndBindingModel;
 import org.isiktir.isupport.domain.models.binding.CauseLevelBindingModel;
 import org.isiktir.isupport.domain.models.binding.CauseTeamBindingModel;
+import org.isiktir.isupport.domain.models.binding.CheckoutBindingModel;
 import org.isiktir.isupport.domain.models.service.CauseIndividualServiceModel;
 import org.isiktir.isupport.domain.models.service.CauseTeamServiceModel;
 import org.isiktir.isupport.domain.models.view.CategoryViewModel;
+import org.isiktir.isupport.domain.models.view.CauseIndividualViewModel;
+import org.isiktir.isupport.domain.models.view.CauseTeamViewModel;
+import org.isiktir.isupport.domain.models.view.CheckoutModel;
 import org.isiktir.isupport.service.CauseIndividualService;
 import org.isiktir.isupport.service.CauseTeamService;
 import org.isiktir.isupport.service.CloudinaryService;
@@ -19,9 +23,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -83,12 +91,13 @@ public class CauseController extends BaseController {
     }
 
     @PostMapping("/create-team-pro")
-    public ModelAndView addTeamCause(@ModelAttribute CauseTeamBindingModel model) throws IOException {
+    public ModelAndView addTeamCause(@ModelAttribute CauseTeamBindingModel model,Principal principal) throws IOException {
 
         CauseTeamServiceModel causeTeamServiceModel = mapper.map(model,CauseTeamServiceModel.class);
         causeTeamServiceModel.setLevel(Level.PROFESSIONAL);
         causeTeamServiceModel.setCategory(selectCategory(Level.PROFESSIONAL.getValue(),model.getCategory()));
         causeTeamServiceModel.setImgUrl(cloudinaryService.uploadImage(model.getImage()));
+        causeTeamServiceModel.setUser(principal.getName());
         service.create(causeTeamServiceModel);
 
         return super.redirect("/");
@@ -107,12 +116,13 @@ public class CauseController extends BaseController {
     }
 
     @PostMapping("/create-team-am")
-    public ModelAndView addTeamCauseAm(@ModelAttribute CauseTeamBindingModel model) throws IOException {
+    public ModelAndView addTeamCauseAm(@ModelAttribute CauseTeamBindingModel model, Principal principal) throws IOException {
 
         CauseTeamServiceModel causeTeamServiceModel = mapper.map(model,CauseTeamServiceModel.class);
         causeTeamServiceModel.setLevel(Level.AMATEUR);
         causeTeamServiceModel.setCategory(selectCategory(Level.AMATEUR.getValue(),model.getCategory()));
         causeTeamServiceModel.setImgUrl(cloudinaryService.uploadImage(model.getImage()));
+        causeTeamServiceModel.setUser(principal.getName());
         service.create(causeTeamServiceModel);
 
         return super.redirect("/");
@@ -174,15 +184,69 @@ public class CauseController extends BaseController {
 
     @PostMapping("/create-cause-am-ind")
     public ModelAndView addICauseIndAm(@ModelAttribute CauseIndBindingModel model, Principal principal) throws IOException {
-
         CauseIndividualServiceModel serviceModel = mapper.map(model,CauseIndividualServiceModel.class);
         serviceModel.setLevel(Level.AMATEUR);
         serviceModel.setCategory(selectCategory(Level.AMATEUR.getValue(),model.getCategory()));
         serviceModel.setImgUrl(cloudinaryService.uploadImage(model.getImage()));
         serviceModel.setUser(principal.getName());
         causeIndividualService.create(serviceModel);
-
         return super.redirect("/");
+    }
+
+
+
+    @GetMapping("/details/individual/{id}")
+    public ModelAndView caueDetail(@PathVariable String id, ModelAndView modelAndView){
+
+        CauseIndividualViewModel viewModel = mapper.
+                map(causeIndividualService.findById(id),CauseIndividualViewModel.class);
+        viewModel.setUnit("individual");
+        modelAndView.addObject("individual",viewModel);
+        return super.view("cause-details-support",modelAndView);
+    }
+
+    @GetMapping("/details/team/{id}")
+    public ModelAndView causeDetailTeam(@PathVariable String id, ModelAndView modelAndView){
+
+        CauseTeamViewModel viewModel = mapper.
+                map(service.findById(id),CauseTeamViewModel.class);
+        viewModel.setUnit("team");
+        modelAndView.addObject("team",viewModel);
+        return super.view("cause-details-support-team",modelAndView);
+    }
+
+    @GetMapping("/support/team/{id}")
+    public ModelAndView checkout(@PathVariable String id,
+                                 ModelAndView modelAndView,
+                                 @ModelAttribute("bindingModel")CheckoutBindingModel bindingModel){
+
+        CheckoutModel checkoutModel = new CheckoutModel(id,"team");
+        modelAndView.addObject("model",checkoutModel);
+        return super.view("checkout-page",modelAndView);
+    }
+
+
+    @PostMapping("/support/team/{id}")
+    public ModelAndView checkoutConfirm(@PathVariable String id,@ModelAttribute CheckoutBindingModel model ) {
+        service.donate(id,model.getMoney());
+        return super.redirect("/home");
+    }
+
+    @GetMapping("/support/individual/{id}")
+    public ModelAndView checkoutInd(@PathVariable String id,
+                                 ModelAndView modelAndView,
+                                 @ModelAttribute("bindingModel")CheckoutBindingModel bindingModel){
+
+        CheckoutModel checkoutModel = new CheckoutModel(id,"team");
+        modelAndView.addObject("model",checkoutModel);
+        return super.view("checkout-page",modelAndView);
+    }
+
+
+    @PostMapping("/support/individual/{id}")
+    public ModelAndView checkoutIndConfirm(@PathVariable String id,@ModelAttribute CheckoutBindingModel model ) {
+        service.donate(id,model.getMoney());
+        return super.redirect("/home");
     }
 
     @GetMapping("/fetch-pro")
