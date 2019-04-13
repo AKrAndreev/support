@@ -42,7 +42,7 @@
             <div class="card">
 
                 <div class="card-body">
-                    <form th:action="@{/causes/create-team-am}" th:method="post" th:object="${bindingModel}" enctype="multipart/form-data">
+                    <form th:action="@{/causes/create-cause-am-ind}" th:method="post" th:object="${bindingModel}" enctype="multipart/form-data">
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-anchor"></i></span>
@@ -56,15 +56,6 @@
                         </div>
                         <div class="input-group form-group">
                             <textarea class="form-control" th:placeholder="Cause" th:field="*{cause}"  id="Cause" rows="1"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control"  th:field="*{players}" id="players"  placeholder="Number of Players">
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control"  th:field="*{trainers}" id="trainers"  placeholder="Number of Trainers">
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" th:field="*{staff}"  id="staff"  placeholder="Number of staff">
                         </div>
 
                         <div class="form-group">
@@ -111,7 +102,7 @@
 </body>
 
 <script type="text/javascript">
-    fetch('/causes/fetch-am').then(function(response) {
+    fetch('/causes/fetch-am-ind').then(function(response) {
         return response.json();
     })
         .then(function(myJson) {
@@ -137,59 +128,6 @@
 
         .catch((err) => console.log(err));
 </script>
-<!--
-<script>
-    fetch('/categories/fetch')
-        .then((response) => response.json())
-    .then((json) => {
-        //Passes the standardly serialized JSON to the "CreateTree" function.
 
-        CreateTree(json);
-
-
-    var localData =  json;
-    $(function () {
-        $('#itemList').ejDropDownTree({
-            enableFilterSearch: true,
-            treeViewSettings: {
-                fields: { id: "id", text: "name", dataSource: localData, expanded: "expanded" }
-            },
-            watermarkText: "Please select",
-            width: "100%"
-        });
-    });
-
-</script>
-
--->
-<!--
-<script>
-    fetch('/causes/fetch')
-        .then((response) => response.json())
-    .then((json) => {
-
-
-        json.forEach((category) =>
-            $('#test').append("<ul>"+createUnorderedList(category.subcategodires)+"</ul>") );
-
-    function createUnorderedList(object) {
-        var ul = $('<ol>');
-
-        for (var i = 0; i < object.length; i++) {
-            if (object[i].subcategodires === undefined) {
-                ul.append($('<li>').text(object[i].name));
-            } else {
-                ul.append(
-                    $('<li>').html(
-                        object[i].name + "<ul>" + createUnorderedList(object[i].subcategodires) + "</ul>"));
-            }
-        }
-
-        return ul.html();
-    }
-    })
-    .catch((err) => console.log(err));
-</script>
--->
 
 </html>

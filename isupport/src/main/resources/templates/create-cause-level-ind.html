@@ -29,7 +29,7 @@
         <div class="card">
 
             <div class="card-body">
-                <form th:action="@{/causes/create-level}" th:method="POST" th:object="${bindingModel}"><input type="hidden" name="_csrf" value="c95ccb2b-1afa-47bd-bf7b-a5b72739470b">
+                <form th:action="@{/causes/create-level-ind}" th:method="POST" th:object="${bindingModel}"><input type="hidden" name="_csrf" value="c95ccb2b-1afa-47bd-bf7b-a5b72739470b">
                     <div class="input-group form-group">
                         <div class="form-check"
                              th:each="lvl : ${T(org.isiktir.isupport.domain.entities.Level).values}">

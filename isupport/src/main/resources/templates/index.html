@@ -525,6 +525,19 @@
   <script src="js/jquery.bxslider.min.js"></script>
   <script src="js/custom.js"></script>
   <script src="contactform/contactform.js"></script>
-
+<script>
+  $(document).ready(function(){
+    $(".dropdown").hover(
+            function() {
+              $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideDown("fast");
+              $(this).toggleClass('open');
+            },
+            function() {
+              $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideUp("fast");
+              $(this).toggleClass('open');
+            }
+    );
+  });
+</script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package org.isiktir.isupport.domain.models.binding;
 
-import org.isiktir.isupport.domain.entities.Category;
 import org.isiktir.isupport.domain.entities.Level;
 import org.isiktir.isupport.domain.entities.User;
 import org.isiktir.isupport.validations.datevalidation.AfterDate;
@@ -14,8 +13,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class CauseTeamBindingModel {
-
+public class CauseIndBindingModel {
     @NotNull
     @Size(min = 3, max = 30, message = "Invalid name! Name should be long between 3 and 30 characters!")
     private String name;
@@ -27,16 +25,6 @@ public class CauseTeamBindingModel {
     @NotNull
     @Size(min = 50, message = "Invalid content! Content should be at least 50 characters!")
     private String cause;
-
-    @NotNull
-    @Min(value = 5,message = "To be considered as a team, at least 5 players should be available!")
-    private int players;
-
-    @NotNull
-    @Min(value = 1, message = "To be considered as a team, trainer is needed!")
-    private int trainers;
-
-    private int staff;
 
     @NotNull(message = "Image is required!")
     private MultipartFile image;
@@ -60,7 +48,7 @@ public class CauseTeamBindingModel {
     @ValidateEnum(targetClassType = Level.class)
     private String level;
 
-    public CauseTeamBindingModel() {
+    public CauseIndBindingModel() {
     }
 
     public String getName() {
@@ -71,7 +59,6 @@ public class CauseTeamBindingModel {
         this.name = name;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -80,7 +67,6 @@ public class CauseTeamBindingModel {
         this.description = description;
     }
 
-
     public String getCause() {
         return cause;
     }
@@ -88,33 +74,6 @@ public class CauseTeamBindingModel {
     public void setCause(String cause) {
         this.cause = cause;
     }
-
-
-    public int getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(int players) {
-        this.players = players;
-    }
-
-
-    public int getTrainers() {
-        return trainers;
-    }
-
-    public void setTrainers(int trainers) {
-        this.trainers = trainers;
-    }
-
-    public int getStaff() {
-        return staff;
-    }
-
-    public void setStaff(int staff) {
-        this.staff = staff;
-    }
-
 
     public MultipartFile getImage() {
         return image;
@@ -132,7 +91,6 @@ public class CauseTeamBindingModel {
         this.neededMoney = neededMoney;
     }
 
-
     public LocalDate getByWhen() {
         return byWhen;
     }
@@ -148,6 +106,7 @@ public class CauseTeamBindingModel {
     public void setCategory(String category) {
         this.category = category;
     }
+
 
     public String getUser() {
         return user;

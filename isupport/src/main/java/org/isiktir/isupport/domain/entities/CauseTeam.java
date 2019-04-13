@@ -23,10 +23,20 @@ public class CauseTeam extends BaseEntity {
     private Category category;
     private User user;
     private Level level;
-
-
+    private Status status;
 
     public CauseTeam() {
+    }
+
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Column(name = "name")

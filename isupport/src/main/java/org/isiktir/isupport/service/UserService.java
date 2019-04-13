@@ -6,5 +6,5 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserService extends UserDetailsService {
 
     UserServiceModel register(UserServiceModel userServiceModel);
-
+    UserServiceModel findByName(String name);
 }

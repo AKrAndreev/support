@@ -41,7 +41,7 @@ public class CategoryController extends BaseController {
 
         List<CategoryViewModel> categoryViewModels = service.findAll()
                 .stream()
-                .filter(CategoryServiceModel::isHasChild)
+                .filter(c-> c.isHasChild() && c.getPid()==null)
                 .map(categoryServiceModel->mapper.map(categoryServiceModel,CategoryViewModel.class))
                 .collect(Collectors.toList());
         modelAndView.addObject("categories",categoryViewModels);

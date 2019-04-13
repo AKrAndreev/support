@@ -19,11 +19,24 @@ public class CauseIndividual extends BaseEntity {
     private Category category;
     private User user;
     private Level level;
+    private Status status;
 
     public CauseIndividual() {
     }
 
-    @NotNull
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    public Status getStatus() {
+        return status;
+    }
+
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    @Column(name = "level")
+    @Enumerated(EnumType.STRING)
     public Level getLevel() {
         return level;
     }
@@ -125,4 +138,5 @@ public class CauseIndividual extends BaseEntity {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

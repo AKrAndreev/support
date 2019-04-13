@@ -10,6 +10,7 @@ public class CategoryServiceModel {
     private String name;
     private Set<Category> subcategodires;
     private boolean hasChild;
+    private String pid;
 
     public CategoryServiceModel() {
     }
@@ -45,5 +46,13 @@ public class CategoryServiceModel {
 
     public void setHasChild(boolean hasChild) {
         this.hasChild = hasChild;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 }

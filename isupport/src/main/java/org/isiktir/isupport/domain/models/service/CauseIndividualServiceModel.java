@@ -7,15 +7,11 @@ import org.isiktir.isupport.domain.entities.User;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class CauseTeamServiceModel {
-
+public class CauseIndividualServiceModel {
     private String id;
     private String name;
     private String description;
     private String cause;
-    private int players;
-    private int trainers;
-    private int staff;
     private String imgUrl;
     private BigDecimal neededMoney;
     private BigDecimal collectedMoney;
@@ -24,15 +20,7 @@ public class CauseTeamServiceModel {
     private String user;
     private Level level;
 
-    public CauseTeamServiceModel() {
-    }
-
-    public Level getLevel() {
-        return level;
-    }
-
-    public void setLevel(Level level) {
-        this.level = level;
+    public CauseIndividualServiceModel() {
     }
 
     public String getId() {
@@ -65,30 +53,6 @@ public class CauseTeamServiceModel {
 
     public void setCause(String cause) {
         this.cause = cause;
-    }
-
-    public int getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(int players) {
-        this.players = players;
-    }
-
-    public int getTrainers() {
-        return trainers;
-    }
-
-    public void setTrainers(int trainers) {
-        this.trainers = trainers;
-    }
-
-    public int getStaff() {
-        return staff;
-    }
-
-    public void setStaff(int staff) {
-        this.staff = staff;
     }
 
     public String getImgUrl() {
@@ -137,5 +101,13 @@ public class CauseTeamServiceModel {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
     }
 }

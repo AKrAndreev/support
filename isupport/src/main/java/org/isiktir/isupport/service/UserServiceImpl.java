@@ -53,6 +53,16 @@ public class UserServiceImpl implements UserService {
         return mapper.map(repository.save(user), UserServiceModel.class);
     }
 
+    @Override
+    public UserServiceModel findByName(String name) {
+
+        User user = repository.findByUsername(name).orElseThrow(()->new UsernameNotFoundException("User not found!"));
+        UserServiceModel userServiceModel = mapper
+                .map(user,UserServiceModel.class);
+
+        return  userServiceModel;
+    }
+
     private Set<Role> giveRoles(String role) {
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByAuthority(role));

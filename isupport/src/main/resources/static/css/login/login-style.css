@@ -14,7 +14,7 @@ html,body{
 }
 
 .card{
-    height: 370px;
+    height: 200px;
     margin-top: auto;
     margin-bottom: auto;
     width: 400px;
@@ -84,4 +84,7 @@ input:focus{
 
 .links a{
     margin-left: 4px;
+}
+.color-me{
+    color:white;
 }
