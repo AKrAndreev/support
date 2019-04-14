@@ -11,4 +11,9 @@ CauseIndividualServiceModel create(CauseIndividualServiceModel serviceModel);
     List<CauseIndividualServiceModel> findForHome();
     CauseIndividualServiceModel findById(String id);
     CauseIndividualServiceModel donate(String id, BigDecimal money);
+    List<CauseIndividualServiceModel> findForReview();
+    CauseIndividualServiceModel updateStatus(String id,String status);
+
+    List<CauseIndividualServiceModel> findAll();
+    CauseIndividualServiceModel edit(CauseIndividualServiceModel serviceModel);
 }

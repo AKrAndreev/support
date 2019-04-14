@@ -72,4 +72,51 @@ public class CauseIndividualServiceImpl implements CauseIndividualService {
         }
         return mapper.map(causeIndividualRepository.save(causeIndividual),CauseIndividualServiceModel.class);
     }
+
+    @Override
+    public List<CauseIndividualServiceModel> findForReview() {
+        return causeIndividualRepository
+                .findAll()
+                .stream()
+                .filter(c->c.getStatus().equals(Status.UNDER_REVIEW))
+                .map(c->mapper.map(c,CauseIndividualServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public CauseIndividualServiceModel updateStatus(String id, String status) {
+
+        CauseIndividual causeIndividual = causeIndividualRepository.findById(id).orElse(null);
+        causeIndividual.setStatus(Status.valueOf(status));
+        return mapper.map(causeIndividualRepository.save(causeIndividual),CauseIndividualServiceModel.class);
+    }
+
+    @Override
+    public List<CauseIndividualServiceModel> findAll() {
+        return causeIndividualRepository.findAll()
+                .stream()
+                .map(c->mapper.map(c,CauseIndividualServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public CauseIndividualServiceModel edit(CauseIndividualServiceModel serviceModel) {
+        CauseIndividual individual = mapper.map(serviceModel,CauseIndividual.class);
+        CauseIndividual forUpdate = causeIndividualRepository.findById(individual.getId()).orElse(null);
+
+        if (forUpdate.getCollectedMoney()==null){
+            forUpdate.setCollectedMoney(BigDecimal.ZERO);
+        }
+        individual.setCollectedMoney(forUpdate.getCollectedMoney());
+        if (individual.getImgUrl()==null || individual.getImgUrl().equalsIgnoreCase("") ){
+            individual.setImgUrl(forUpdate.getImgUrl());
+        }
+
+        individual.setUser(forUpdate.getUser());
+        individual.setStatus(Status.UNDER_REVIEW);
+        CauseIndividual updated = causeIndividualRepository.save(individual);
+
+        return mapper.map(updated,CauseIndividualServiceModel.class);
+    }
 }

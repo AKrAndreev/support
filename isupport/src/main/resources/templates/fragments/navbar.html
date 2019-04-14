@@ -35,7 +35,8 @@
                                           <ul class="dropdown-menu" role="menu">
                                               <li  class="nav-link"><a th:href="@{/causes/create-level}">Team</a></li>
                                               <li  class="nav-link"><a th:href="@{/causes/create-level-ind}">Individual</a></li>
-                                              <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-link"><a th:href="@{/causes/update}">Update</a></li>
+                                              <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-link"><a th:href="@{/causes/update}">Review</a></li>
+                                              <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-link"><a th:href="@{/causes/all-causes}">All Causes</a></li>
                                           </ul>
                                     </li>
 
@@ -47,4 +48,25 @@
                         </div>
                     </nav>
                 </header>
+                <div class="wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="banner-info text-center wow fadeIn delay-05s">
+                                <h1 class="bnr-title">We are at ba<span>ker</span></h1>
+                                <h2 class="bnr-sub-title">Starting a new journey!!</h2>
+                                <p class="bnr-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip <br>ex ea commodo consequat.</p>
+                                <div class="brn-btn">
+                                    <a href="#" class="btn btn-download">Download now!</a>
+                                    <a href="#" class="btn btn-more">Learn More</a>
+                                </div>
+                                <div class="overlay-detail">
+                                    <a href="#feature"><i class="fa fa-angle-down"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </th:block>

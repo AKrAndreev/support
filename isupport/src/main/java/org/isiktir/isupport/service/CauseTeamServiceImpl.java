@@ -76,4 +76,46 @@ public class CauseTeamServiceImpl implements CauseTeamService {
         }
         return mapper.map(repository.save(causeTeam),CauseTeamServiceModel.class);
     }
+
+    @Override
+    public List<CauseTeamServiceModel> findForReview() {
+        return repository.findAll().stream()
+                .filter(c->c.getStatus().getValue().equalsIgnoreCase(Status.UNDER_REVIEW.getValue()))
+                .map(c->mapper.map(c,CauseTeamServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public CauseTeamServiceModel updateStatus(String id,String status) {
+        CauseTeam causeTeam = repository.findById(id).orElse(null);
+        causeTeam.setStatus(Status.valueOf(status));
+
+        return mapper.map(repository.save(causeTeam),CauseTeamServiceModel.class);
+    }
+
+    @Override
+    public List<CauseTeamServiceModel> findAll() {
+        return repository.findAll()
+                .stream()
+                .map(c->mapper.map(c,CauseTeamServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public CauseTeamServiceModel edit(CauseTeamServiceModel causeTeamServiceModel) {
+        CauseTeam team = mapper.map(causeTeamServiceModel,CauseTeam.class);
+        CauseTeam teamFroUpdate = repository.getOne(team.getId());
+
+        team.setUser(teamFroUpdate.getUser());
+        if (team.getCollectedMoney() == null){
+            team.setCollectedMoney(BigDecimal.ZERO);
+        }
+        if (team.getImgUrl() == null || team.getImgUrl().equalsIgnoreCase("")){
+            team.setImgUrl(teamFroUpdate.getImgUrl());
+        }
+        team.setStatus(Status.UNDER_REVIEW);
+        CauseTeam updatedTeam =  repository.saveAndFlush(team);
+
+        return mapper.map(updatedTeam,CauseTeamServiceModel.class);
+    }
 }

@@ -11,4 +11,8 @@ public interface CauseTeamService {
     List<CauseTeamServiceModel> findForHome();
     CauseTeamServiceModel findById(String id);
     CauseTeamServiceModel donate(String id, BigDecimal money);
+    List<CauseTeamServiceModel> findForReview();
+    CauseTeamServiceModel updateStatus(String id, String status);
+    List<CauseTeamServiceModel> findAll();
+    CauseTeamServiceModel edit(CauseTeamServiceModel causeTeamServiceModel);
 }

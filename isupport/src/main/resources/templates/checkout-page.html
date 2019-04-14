@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:input="http://www.w3.org/1999/html">
+
+<head>
+
+    <th:block th:replace="fragments/head"></th:block>
+
+    <!-- boorstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cause-details/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cause-details/video.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cause-details/animate.css}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cause-details/settings.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cause-details/layers.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cause-details/navigation.css}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cause-details/menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cause-details/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cause-details/responsive.css}">
+</head>
+
+
+
+
+<body>
+<header>
+
+    <div class="loader"></div>
+    <div id="myDiv">
+        <!--HEADER-->
+        <div class="header">
+            <div class="bg-color">
+                <header id="main-header">
+                    <nav class="navbar navbar-default navbar-fixed-top">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand"  th:href="@{/}">Ba<span class="logo-dec">ker</span></a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="active"><a th:href="@{/}">Home</a></li>
+                                    <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-link"><a th:href="@{/categories/create}">Category</a></li>
+
+                                    <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-link dropdown">
+
+                                        <a class="dropdown-toggle" href="#" role="button" id="cause-dropdown"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Create Cause <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li class="nav-link"><a th:href="@{/causes/create-level}">Team</a></li>
+                                            <li class="nav-link"><a th:href="@{/causes/create-level-ind}">Individual</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li sec:authorize="isAnonymous()" class="nav-link"><a th:href="@{/register}">Register</a></li>
+                                    <li sec:authorize="isAnonymous()"  class="nav-link"><a th:href="@{/login}">Login</a></li>
+                                    <li sec:authorize="isAuthenticated()"  class="nav-link"> <a th:href ="@{/logout}">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+
+
+
+                <!-- Start of Donate page content
+                    ============================================= -->
+                <section id="donate-page" class="donate-page-section">
+                    <div class="container">
+                        <div class="row section-content">
+                            <div class="donation-content">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="donate-type pb50">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="donate-info">
+                                                        <div class="side-bar-title mb20">
+                                                            <h3>Donation Info</h3>
+                                                        </div>
+                                                        <!-- /head -->
+                                                        <div class="donate-cause">
+                                                            <div class="donate-text">
+                                                                <span>Lorem ipsum dolor sit ametlyeolo consectetur adipisicing elit sed dong eiusmod tempor incididun.</span>
+                                                            </div>
+
+                                                            <!-- / donate-cause-item-->
+                                                        </div>
+                                                    </div>
+                                                    <!-- /info -->
+                                                </div>
+                                                <!-- /col-sm-6 -->
+                                                <div class="col-sm-6">
+                                                    <div class="donate-amount pull-right">
+                                                        <div class="side-bar-title mb20">
+                                                            <h3>Donation Amount</h3>
+                                                        </div>
+                                                        <p>Amount*</p>
+                                                        <div class="donate-dollar">
+                                                            <div class="newsletter-form">
+                                                                <form th:action="@{/causes/support/{unit}/{id}(unit=${model.unit},id=${model.id})}" th:method="post" th:object="${bindingModel}" class="nwsltter">
+                                                                    <div class="form-group">
+                                                                        <input type="number" step="any" class="form-control" th:field="*{money}" id="needed-money" name="needed-money" placeholder="Amount of money">
+                                                                    </div>
+                                                                    <input type="radio" name="amount" value="Visa" checked=""> <label>Visa</label>
+                                                                    <input type="radio" name="amount" value="Paypal"> <label>Paypal</label>
+                                                                    <div class="send-button text-uppercase">
+                                                                        <button type="submit" value="Submit">donate now</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /col-sm-6 -->
+                                            </div>
+                                        </div>
+                                        <!-- /donate-type -->
+
+                                        <div class="donar-type">
+                                            <div class="donar-info">
+                                                <div class="side-bar-title mb40">
+                                                    <h3>Donar Info</h3>
+                                                </div>
+                                                <div class="donate-form">
+                                                    <div class="comment-form clearfix  mb20">
+                                                        <form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
+                                                            <div class="contact-comment-info">
+                                                                <input class="name" name="name" type="text" placeholder="Your Name*">
+                                                            </div>
+                                                            <div class="contact-comment-info">
+                                                                <input class="email" name="email" type="email" placeholder="Email*">
+                                                            </div>
+                                                            <div class="contact-comment-info">
+                                                                <input class="email" name="email" type="text" placeholder="Address*">
+                                                            </div>
+                                                            <div class="contact-comment-info">
+                                                                <div class="contact-comment-info">
+                                                                    <input class="email" name="email" type="text" placeholder="Additional Note*">
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+
+                                                </div>
+                                                <!-- /col-sm-6 -->
+                                            </div>
+                                        </div>
+                                        <!-- /donar-type -->
+                                    </div>
+                                    <!-- /col-sm-8 -->
+                                    <div class="col-sm-4">
+                                        <div class="side-bar-content ml15">
+                                            <div class="side-bar-search mb40">
+                                                <form action="#" method="get">
+                                                    <input type="text" class="" placeholder="Search here...">
+                                                    <button type="submit"><span class="ti-search"></span></button>
+                                                </form>
+                                            </div>
+                                            <!-- /side-bar-search -->
+
+                                            <!-- /category-item -->
+                                        </div>
+                                    </div>
+                                    <!-- /col-md-4 -->
+                                </div>
+                                <!-- /row -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+</body>
+</html>
